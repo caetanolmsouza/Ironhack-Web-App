@@ -107,15 +107,15 @@ function showCorona(classToAdd) {
     cells[currentPosition].classList.remove('putin')
   }
   
-  function movePlayer(XinewPosition, classToAdd) {
-    if (XinewPosition < 0) {
+  function movePlayer(newPosition, classToAdd) {
+    if (newPosition < 0) {
       return
     }
-    if (XinewPosition > gridWidth * gridHeight - 1) {
+    if (newPosition > gridWidth * gridHeight - 1) {
       return
     }
     removePlayer()
-    currentPosition = XinewPosition
+    currentPosition = newPosition
   
     
     // Always show last
@@ -466,3 +466,49 @@ moveKim(kimCurrentPosition)
 
 let corPosition = shootPosition
 function theShot () {}
+
+
+
+
+
+
+
+
+
+// Testing ---------------------------------------------
+/*
+class ShowThings {
+  constructor(position, newPosition, name){
+this.position = position
+this.newPosition = newPosition
+this.name = name
+}
+
+ show(classToAdd) {
+  // Show the player in the currentPosition
+  cells[this.Position].classList.add(this.name)
+  if (classToAdd) {
+    cells[this.Position].classList.add(classToAdd)
+  }
+}
+remove() {
+  // Stop showing the player in the currentPosition
+  cells[this.Position].classList.remove(this.name)
+}
+
+move(newPosition, classToAdd) {
+  this.newPosition = newPosition
+  if (this.newPosition < 0) {
+    return
+  }
+  if (this.newPosition > gridWidth * gridHeight - 1) {
+    return
+  }
+  remove()
+  this.position = this.newPosition
+
+ 
+  // Always show last
+  show(classToAdd)
+}
+*/ 
