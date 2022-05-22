@@ -1,0 +1,93 @@
+* {
+    box-sizing: border-box;
+}
+h1 {
+    margin-left: 580px;
+}
+
+
+.grid {
+    display: flex;
+    height: 900px;
+    width: 900px;
+    flex-wrap: wrap;
+    margin-left: 200px;
+    z-index: -20;
+ background-color: black;
+}
+
+.cell {
+    border: 1px solid black;
+    width: 60px;
+    height: 60px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.putin {
+    background-image:url('./images/putin.png');
+    z-index: 15;
+}
+
+.coronas {
+    background-image: url("./images/corVirus.png");
+    z-index: 10;
+}
+
+.xi-Jinping {
+    background-image: url("./images/xi-Jinping.png");
+    z-index: 10;
+}
+
+.trump {
+    background-image: url("./images/trump.png");
+    z-index: 10;
+}
+
+.merkel {
+    background-image: url("./images/merkel.png");
+    z-index: 10;
+}
+
+.harry {
+    background-image: url("./images/harry.png");
+    z-index: 10;
+    background-size:cover;
+}
+
+.pope {
+    background-image: url("./images/pope.png");
+    z-index: 10;
+   
+}
+
+.musk {
+    background-image: url("./images/musk.png");
+    z-index: 10;
+   
+}
+
+.macron {
+    background-image: url("./images/macron.png");
+    z-index: 10;
+   
+}
+
+.kim {
+    background-image: url("./images/kimJongUn.png");
+    z-index: 10;
+   
+}
+
+.erdogan {
+    background-image: url("./images/erdogan.png");
+    z-index: 10;
+   
+}
+
+.boris {
+    background-image: url("./images/boris.png");
+    z-index: 10;
+   
+}
