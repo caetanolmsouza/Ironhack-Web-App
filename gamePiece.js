@@ -46,9 +46,11 @@ class Target extends GamePiece {
   }
 }
 
+class Player extends GamePiece {}
+
 class Bullet extends GamePiece {
   nextStep(intervalId) {
-    // what does ythe bullet do each step
+    // what does the bullet do each step
     this.move(-15);
     if (this.position < 15) {
       this.remove();

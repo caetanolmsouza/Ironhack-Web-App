@@ -16,9 +16,6 @@ let score = 0;
 const initialPosition = 202;
 let currentPosition = initialPosition;
 
-let initialCoronaPosition = currentPosition;
-let coronaPosition = currentPosition;
-
 const xi = new Target(34, "xi-Jinping");
 
 const trump = new Target(36, "trump");
@@ -39,6 +36,8 @@ const erdogan = new Target(40, "erdogan");
 
 const kim = new Target(26, "kim");
 
+const player = new Player(202, "putin");
+
 for (let i = 0; i < gridWidth * gridHeight; i++) {
   const cell = createCell();
   gridElement.appendChild(cell);
@@ -49,60 +48,6 @@ function createCell() {
   const cell = document.createElement("div");
   cell.classList.add("cell");
   return cell;
-}
-
-function showCorona(classToAdd) {
-  // Show the player in the currentPosition
-  cells[coronaPosition].classList.add("coronas");
-  if (classToAdd) {
-    cells[coronaPosition].classList.add(classToAdd);
-  }
-}
-
-function removeCorona() {
-  // Stop showing the player in the currentPosition
-  cells[coronaPosition].classList.remove("coronas");
-}
-
-function moveCorona(newCoronaPosition, classToAdd) {
-  if (newCoronaPosition < 0) {
-    return;
-  }
-  if (newCoronaPosition > gridWidth * gridHeight - 1) {
-    return;
-  }
-  removeCorona();
-  coronaPosition = newCoronaPosition;
-
-  // Always show last
-  showCorona(classToAdd);
-}
-
-function showPlayer(classToAdd) {
-  // Show the player in the currentPosition
-  cells[currentPosition].classList.add("putin");
-  if (classToAdd) {
-    cells[currentPosition].classList.add(classToAdd);
-  }
-}
-
-function removePlayer() {
-  // Stop showing the player in the currentPosition
-  cells[currentPosition].classList.remove("putin");
-}
-
-function movePlayer(newPosition, classToAdd) {
-  if (newPosition < 0) {
-    return;
-  }
-  if (newPosition > gridWidth * gridHeight - 1) {
-    return;
-  }
-  removePlayer();
-  currentPosition = newPosition;
-
-  // Always show last
-  showPlayer(classToAdd);
 }
 
 function createBullet() {
@@ -132,13 +77,13 @@ document.addEventListener("keydown", function (event) {
       if (currentPosition % gridWidth === 0) {
         break;
       }
-      movePlayer(currentPosition - 1);
+      player.move(currentPosition - 1);
       break;
     case "ArrowRight":
       if (currentPosition % gridWidth === gridWidth - 1) {
         break;
       }
-      movePlayer(currentPosition + 1);
+      player.move(currentPosition + 1);
       break;
     case "ArrowUp":
       createBullet();
@@ -146,16 +91,31 @@ document.addEventListener("keydown", function (event) {
   }
 });
 
-movePlayer(currentPosition);
+player.move(0);
 
-const aliveEnemies = [trump, xi, merkel];
+const aliveEnemies = [
+  trump,
+  xi,
+  merkel,
+  harry,
+  pope,
+  musk,
+  macron,
+  boris,
+  erdogan,
+  kim,
+];
 
 setInterval(() => {
+  // move all bullets
+
+  // move all players
   aliveEnemies.forEach((x) => {
     x.move(1);
-    // check collisions
-    // remove if colliding
   });
+  // check collisions
+
+  // remove colliding enemy/bullet pairs
 }, 500);
 
 //kim.move(0);
