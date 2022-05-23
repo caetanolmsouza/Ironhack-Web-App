@@ -105,6 +105,25 @@ function movePlayer(newPosition, classToAdd) {
   showPlayer(classToAdd);
 }
 
+function createBullet() {
+  const bulletStartPosition = currentPosition - gridWidth;
+  const bullet = new Bullet(bulletStartPosition, "coronas");
+  bullet.show();
+  const intervalId = setInterval(() => {
+    bullet.nextStep(intervalId);
+    trump.isColliding(bullet);
+    xi.isColliding(bullet);
+    merkel.isColliding(bullet);
+    harry.isColliding(bullet);
+    pope.isColliding(bullet);
+    musk.isColliding(bullet);
+    macron.isColliding(bullet);
+    boris.isColliding(bullet);
+    erdogan.isColliding(bullet);
+    kim.isColliding(bullet);
+  }, 400);
+}
+
 document.addEventListener("keydown", function (event) {
   console.log(event.key, event.keyCode, event.code);
 
@@ -122,22 +141,21 @@ document.addEventListener("keydown", function (event) {
       movePlayer(currentPosition + 1);
       break;
     case "ArrowUp":
-      moveCorona(currentPosition - gridWidth);
+      createBullet();
       break;
   }
 });
 
 movePlayer(currentPosition);
 
+const aliveEnemies = [trump, xi, merkel];
+
 setInterval(() => {
-  xi.move(1);
+  aliveEnemies.forEach((x) => {
+    x.move(1);
+    // check collisions
+    // remove if colliding
+  });
 }, 500);
-trump.move(0);
-merkel.move(0);
-harry.move(0);
-pope.move(0);
-musk.move(0);
-macron.move(0);
-boris.move(0);
-erdogan.move(0);
-kim.move(0);
+
+//kim.move(0);
