@@ -93,9 +93,7 @@ const bulletsIntervalId = setInterval(() => {
     aliveEnemies.forEach((enemie) => {
       enemie.isColliding(bullet);
 
-      if (enemie.isColliding(bullet)) {
-        score += 10;
-      }
+     
     });
   });
 }, 200);
@@ -145,7 +143,7 @@ intervalId = setInterval(() => {
     //   //x.position.classList.add("explosion");
     //   // score += 10;
     //   // console.log("hey");
-    //   // scoreElement.textContent = "Score = " + score;
+ scoreElement.textContent = "Score = " + score;
     //   // x.remove();
     //   bullet.remove();
     //   clearInterval(intervalId);
