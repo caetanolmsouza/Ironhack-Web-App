@@ -25,6 +25,10 @@ h1 {
     background-position: center;
 }
 
+.score {
+    font-size: 2rem;
+}
+
 .putin {
     background-image:url('./images/putin.png');
     z-index: 15;
@@ -90,4 +94,9 @@ h1 {
     background-image: url("./images/boris.png");
     z-index: 10;
    
+}
+
+.explosion {
+    background-image: url("./images/gif-explosion-11.gif");
+    z-index: 20;
 }

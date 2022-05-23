@@ -15,11 +15,14 @@ class GamePiece {
   }
   remove() {
     // Stop showing the player in the currentPosition
-    console.log(cells[this.position], this.position);
+    // console.log(cells[this.position], this.position);
     cells[this.position].classList.remove(this.className);
   }
 
   move(increment) {
+    // if (!this.isAlive) {
+    //   return;
+    // }
     this.newPosition = this.position + increment;
     if (this.newPosition < 0) {
       return;
@@ -46,15 +49,25 @@ class Target extends GamePiece {
   }
 }
 
-class Player extends GamePiece {}
+class Player extends GamePiece {
+  /* move() {
+    setInterval(() => {
+      if (this.position === 195) {
+        this.position + 1;
+      }
+      if (this.position === 209) {
+        this.position - 1;
+      }
+    }, 500);
+  }*/
+}
 
 class Bullet extends GamePiece {
-  nextStep(intervalId) {
+  nextStep() {
     // what does the bullet do each step
     this.move(-15);
     if (this.position < 15) {
       this.remove();
-      clearInterval(intervalId);
     }
   }
 }
