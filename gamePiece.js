@@ -84,4 +84,9 @@ class Bullet extends GamePiece {
       this.remove();
     }
   }
+  isCollidingWithAny(targets) {
+    // if any target in targets isColliding, return true
+    // otherwise return false
+    return targets.some((target) => target.isColliding(this));
+  }
 }

@@ -17,7 +17,7 @@ const gridWidth = 15;
 const gridHeight = 15;
 const cells = [];
 
-let bulletsCount = 30;
+let bulletsCount = 40;
 
 const initialPosition = 202;
 
@@ -43,7 +43,7 @@ const kim = new Target(26, "kim");
 
 const player = new Player(202, "putin");
 
-const aliveEnemies = [
+const allEnemies = [
   trump,
   xi,
   merkel,
@@ -55,6 +55,7 @@ const aliveEnemies = [
   erdogan,
   kim,
 ];
+
 // const bullet = new Bullet();
 // creqte qn qrrqy for qll current bullets
 
@@ -94,6 +95,9 @@ const bulletsIntervalId = setInterval(() => {
       return false;
     }
     if (bullet.isAlive) {
+      if (bullet.isCollidingWithAny(getAliveEnemies())) {
+        updateScore();
+      }
       return true;
     }
   });
@@ -128,16 +132,22 @@ document.addEventListener("keydown", function (event) {
 
 player.move(0);
 
+function getAliveEnemies() {
+  return allEnemies.filter((x) => x.isAlive);
+}
+function updateScore() {
+  score += 12;
+  scoreElement.textContent = "score = " + score;
+}
+
 let intervalId = setInterval(() => {
   // move all bullets
+  const aliveEnemies = getAliveEnemies();
   console.log(aliveEnemies);
   // move all players
   aliveEnemies.forEach((x) => {
     if (x.isCollidingWithAny(allBullets)) {
-      let enemiesPos = aliveEnemies.indexOf(x);
-      aliveEnemies.splice(enemiesPos, 1);
-      score += 12;
-      scoreElement.textContent = "score = " + score;
+      updateScore();
     }
     x.move(1);
     if (player.position === x.position) {
@@ -150,19 +160,18 @@ let intervalId = setInterval(() => {
 
       console.log("GAME OVER!");
     }
-
-    if (aliveEnemies.length === 0) {
-      player.remove();
-
-      winDisplay.classList.add("win");
-      winDance.classList.add("winDance");
-      clearInterval(intervalId);
-
-      console.log("YOU WIN!");
-    }
   });
   // check collisions
   //testing
+  if (getAliveEnemies().length === 0) {
+    player.remove();
+
+    winDisplay.classList.add("win");
+    winDance.classList.add("winDance");
+    clearInterval(intervalId);
+
+    console.log("YOU WIN!");
+  }
 
   // remove colliding enemy/bullet pairs
 }, 500);
