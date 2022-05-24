@@ -6,6 +6,7 @@ const putin = document.querySelector(".putin");
 const coronas = document.querySelector(".coronas");
 const xiJinping = document.querySelector(".xi-Jinping");
 const scoreElement = document.querySelector(".score");
+const gameOverUnDisplay = document.querySelector(".nothing");
 
 let score = 0;
 const gridWidth = 15;
@@ -75,6 +76,13 @@ function createBullet() {
 
 const bulletsIntervalId = setInterval(() => {
   console.log(allBullets);
+  allBullets.forEach((bullet) => {
+    bullet.nextStep();
+    aliveEnemies.forEach((enemie) => {
+      enemie.isColliding(bullet);
+    });
+  });
+
   allBullets = allBullets.filter((bullet) => {
     if (!bullet.isAlive) {
       score += 12;
@@ -88,14 +96,6 @@ const bulletsIntervalId = setInterval(() => {
   });
   console.log(allBullets, "filtered");
   // instead of doing next step and isColliding for just one bullet, do it for every current bullet
-  allBullets.forEach((bullet) => {
-    bullet.nextStep();
-    aliveEnemies.forEach((enemie) => {
-      enemie.isColliding(bullet);
-
-     
-    });
-  });
 }, 200);
 
 document.addEventListener("keydown", function (event) {
@@ -134,16 +134,18 @@ intervalId = setInterval(() => {
     x.move(1);
     if (player.position === x.position) {
       player.remove();
-
+      gameOverUnDisplay.classList.add("gameOver");
       clearInterval(intervalId);
+
       console.log("GAME OVER!");
     }
+    scoreElement.textContent = "score = " + score;
 
     // if (bullet.position === x.position) {
     //   //x.position.classList.add("explosion");
     //   // score += 10;
     //   // console.log("hey");
- scoreElement.textContent = "Score = " + score;
+
     //   // x.remove();
     //   bullet.remove();
     //   clearInterval(intervalId);

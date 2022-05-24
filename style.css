@@ -2,7 +2,10 @@
     box-sizing: border-box;
 }
 h1 {
-    margin-left: 580px;
+    margin-left: 420px;
+    font-family: monospace;
+    font-size: 2rem;;
+    color:darkblue;
 }
 
 
@@ -27,6 +30,11 @@ h1 {
 
 .score {
     font-size: 2rem;
+    position: absolute;
+    margin-left: 240px;
+    color:aquamarine;
+    margin-top: 90px;
+    font-family: monospace;
 }
 
 .putin {
@@ -99,4 +107,23 @@ h1 {
 .explosion {
     background-image: url("./images/gif-explosion-11.gif");
     z-index: 20;
+}
+
+.nothing {
+    color: black;
+    font-family:monospace;
+    font-size: 120px;
+    position: absolute;
+    margin-top: 370px;
+    margin-left: 290px;
+    z-index: -30;}
+
+.gameOver {
+color: blueviolet;
+font-family:monospace;
+font-size: 120px;
+position: absolute;
+margin-top: 370px;
+margin-left: 290px;
+z-index: 30;
 }

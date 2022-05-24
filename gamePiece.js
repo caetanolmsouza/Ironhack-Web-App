@@ -42,6 +42,13 @@ class Target extends GamePiece {
   isColliding(otherGamePiece) {
     // do this and otherGAMEPIECE collide?
     if (this.position === otherGamePiece.position) {
+      cells[this.position].classList.add("explosion");
+      let i = this.position;
+
+      setTimeout(() => {
+        cells[i].classList.remove("explosion");
+      }, 400);
+      //remove class and then set timeout to change the class
       this.remove();
       this.isAlive = false;
       otherGamePiece.isAlive = false;
