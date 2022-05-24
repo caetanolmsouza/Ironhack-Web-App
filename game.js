@@ -8,11 +8,16 @@ const xiJinping = document.querySelector(".xi-Jinping");
 const scoreElement = document.querySelector(".score");
 const gameOverUnDisplay = document.querySelector(".nothing");
 const winDisplay = document.querySelector(".nothingWin");
+const winDance = document.querySelector(".noClass");
+const winMacron = document.querySelector(".noClass2");
+const bulletsCounter = document.querySelector(".bulletsCount");
 
 let score = 0;
 const gridWidth = 15;
 const gridHeight = 15;
 const cells = [];
+
+let bulletsCount = 30;
 
 const initialPosition = 202;
 
@@ -83,7 +88,7 @@ const bulletsIntervalId = setInterval(() => {
   // instead of doing next step and isColliding for just one bullet, do it for every current bullet
   allBullets = allBullets.filter((bullet) => {
     if (!bullet.isAlive) {
-      score += 12;
+      // score += 12;
       console.log(score);
       bullet.remove();
       return false;
@@ -92,7 +97,7 @@ const bulletsIntervalId = setInterval(() => {
       return true;
     }
   });
-}, 200);
+}, 250);
 
 document.addEventListener("keydown", function (event) {
   console.log(event.key, event.keyCode, event.code);
@@ -111,7 +116,12 @@ document.addEventListener("keydown", function (event) {
       player.move(+1);
       break;
     case "ArrowUp":
-      createBullet();
+      if (bulletsCount > 0) {
+        bulletsCount += -1;
+        bulletsCounter.textContent = "bullets = " + bulletsCount;
+
+        createBullet();
+      }
       break;
   }
 });
@@ -126,20 +136,26 @@ let intervalId = setInterval(() => {
     if (x.isCollidingWithAny(allBullets)) {
       let enemiesPos = aliveEnemies.indexOf(x);
       aliveEnemies.splice(enemiesPos, 1);
+      score += 12;
+      scoreElement.textContent = "score = " + score;
     }
     x.move(1);
     if (player.position === x.position) {
       player.remove();
       gameOverUnDisplay.classList.add("gameOver");
+      winMacron.classList.remove("noClass2");
+      winMacron.classList.add("winMacron");
+
       clearInterval(intervalId);
 
       console.log("GAME OVER!");
     }
-    scoreElement.textContent = "score = " + score;
 
     if (aliveEnemies.length === 0) {
       player.remove();
+
       winDisplay.classList.add("win");
+      winDance.classList.add("winDance");
       clearInterval(intervalId);
 
       console.log("YOU WIN!");

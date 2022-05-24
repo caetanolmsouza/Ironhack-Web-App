@@ -16,11 +16,10 @@ h1 {
     flex-wrap: wrap;
     margin-left: 200px;
     z-index: -20;
- background-color: black;
-}
+background-image: url("./images/space.jpg");
+background-size:cover;}
 
 .cell {
-    border: 1px solid black;
     width: 60px;
     height: 60px;
     background-size: contain;
@@ -109,6 +108,23 @@ h1 {
     z-index: 20;
 }
 
+.noClass{
+    position: absolute;
+    left: -400px;
+    z-index: -32;
+    width: 10px;
+
+}
+
+
+.noClass2 {
+    position: absolute;
+    left: -400px;
+    z-index: -32;
+    width: 10px;
+
+}
+
 .nothing {
     color: black;
     font-family:monospace;
@@ -142,7 +158,37 @@ z-index: 30;
 font-family:monospace;
 font-size: 120px;
 position: absolute;
-margin-top: 370px;
+margin-top: 470px;
 margin-left: 370px;
 z-index: 30;
 }
+
+
+.bulletsCount {
+    font-family: monospace;
+    color: rgb(249, 58, 58);
+    font-size: 2rem;
+    position:absolute;
+    left: 260px;
+    top: 930px;
+    font-weight: bolder;
+}
+
+
+
+.winDance {
+width: 200px; 
+position: absolute;
+    margin-left: 960px;
+    margin-top: -750px;
+    z-index: 31;
+}
+
+.winMacron {
+    position: absolute;
+    width: 300px;
+    margin-left: 540px;
+top:  200px;
+z-index: 20;
+}
+
