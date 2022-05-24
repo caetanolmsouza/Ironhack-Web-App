@@ -7,6 +7,7 @@ const coronas = document.querySelector(".coronas");
 const xiJinping = document.querySelector(".xi-Jinping");
 const scoreElement = document.querySelector(".score");
 const gameOverUnDisplay = document.querySelector(".nothing");
+const winDisplay = document.querySelector(".nothingWin");
 
 let score = 0;
 const gridWidth = 15;
@@ -14,7 +15,6 @@ const gridHeight = 15;
 const cells = [];
 
 const initialPosition = 202;
-let currentPosition = initialPosition;
 
 const xi = new Target(34, "xi-Jinping");
 
@@ -67,7 +67,7 @@ function createCell() {
 }
 
 function createBullet() {
-  const bulletStartPosition = currentPosition - gridWidth;
+  const bulletStartPosition = player.position - gridWidth;
   const bullet = new Bullet(bulletStartPosition, "coronas");
   // put the newly created bullet in the array of all current bullets
   bullet.show();
@@ -75,14 +75,12 @@ function createBullet() {
 }
 
 const bulletsIntervalId = setInterval(() => {
-  console.log(allBullets);
+  //player.nextMove();
   allBullets.forEach((bullet) => {
     bullet.nextStep();
-    aliveEnemies.forEach((enemie) => {
-      enemie.isColliding(bullet);
-    });
   });
 
+  // instead of doing next step and isColliding for just one bullet, do it for every current bullet
   allBullets = allBullets.filter((bullet) => {
     if (!bullet.isAlive) {
       score += 12;
@@ -94,8 +92,6 @@ const bulletsIntervalId = setInterval(() => {
       return true;
     }
   });
-  console.log(allBullets, "filtered");
-  // instead of doing next step and isColliding for just one bullet, do it for every current bullet
 }, 200);
 
 document.addEventListener("keydown", function (event) {
@@ -103,16 +99,16 @@ document.addEventListener("keydown", function (event) {
 
   switch (event.key) {
     case "ArrowLeft":
-      if (currentPosition % gridWidth === 0) {
+      if (player.position % gridWidth === 0) {
         break;
       }
-      player.move(currentPosition - 1);
+      player.move(-1);
       break;
     case "ArrowRight":
-      if (currentPosition % gridWidth === gridWidth - 1) {
+      if (player.position % gridWidth === gridWidth - 1) {
         break;
       }
-      player.move(currentPosition + 1);
+      player.move(+1);
       break;
     case "ArrowUp":
       createBullet();
@@ -122,15 +118,15 @@ document.addEventListener("keydown", function (event) {
 
 player.move(0);
 
-let intervalId = null;
-
-let bulletsStock = [];
-
-intervalId = setInterval(() => {
+let intervalId = setInterval(() => {
   // move all bullets
-
+  console.log(aliveEnemies);
   // move all players
   aliveEnemies.forEach((x) => {
+    if (x.isCollidingWithAny(allBullets)) {
+      let enemiesPos = aliveEnemies.indexOf(x);
+      aliveEnemies.splice(enemiesPos, 1);
+    }
     x.move(1);
     if (player.position === x.position) {
       player.remove();
@@ -141,16 +137,13 @@ intervalId = setInterval(() => {
     }
     scoreElement.textContent = "score = " + score;
 
-    // if (bullet.position === x.position) {
-    //   //x.position.classList.add("explosion");
-    //   // score += 10;
-    //   // console.log("hey");
+    if (aliveEnemies.length === 0) {
+      player.remove();
+      winDisplay.classList.add("win");
+      clearInterval(intervalId);
 
-    //   // x.remove();
-    //   bullet.remove();
-    //   clearInterval(intervalId);
-    //   // bulletsStock.push(bullet);
-    // }
+      console.log("YOU WIN!");
+    }
   });
   // check collisions
   //testing

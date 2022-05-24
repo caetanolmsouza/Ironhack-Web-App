@@ -39,6 +39,11 @@ class GamePiece {
 }
 
 class Target extends GamePiece {
+  isCollidingWithAny(gamePieces) {
+    // if any gamePiece in gamePieces isColliding, return true
+    // otherwise return false
+    return gamePieces.some((gamePiece) => this.isColliding(gamePiece));
+  }
   isColliding(otherGamePiece) {
     // do this and otherGAMEPIECE collide?
     if (this.position === otherGamePiece.position) {
@@ -52,21 +57,23 @@ class Target extends GamePiece {
       this.remove();
       this.isAlive = false;
       otherGamePiece.isAlive = false;
+      return true;
     }
+    return false;
   }
 }
 
 class Player extends GamePiece {
-  /* move() {
-    setInterval(() => {
-      if (this.position === 195) {
-        this.position + 1;
-      }
-      if (this.position === 209) {
-        this.position - 1;
-      }
-    }, 500);
-  }*/
+  /*nextMove() {
+    if (this.position === 209) {
+      this.move(-1);
+    }
+    if (this.position < 195) {
+      this.move(1);
+    }
+    this.move(1);
+  }
+}*/
 }
 
 class Bullet extends GamePiece {

@@ -118,6 +118,15 @@ h1 {
     margin-left: 290px;
     z-index: -30;}
 
+    .nothingWin {
+        color: black;
+        font-family:monospace;
+        font-size: 120px;
+        position: absolute;
+        margin-top: 370px;
+        margin-left: 290px;
+        z-index: -30;}
+
 .gameOver {
 color: blueviolet;
 font-family:monospace;
@@ -125,5 +134,15 @@ font-size: 120px;
 position: absolute;
 margin-top: 370px;
 margin-left: 290px;
+z-index: 30;
+}
+
+.win {
+    color:chartreuse;
+font-family:monospace;
+font-size: 120px;
+position: absolute;
+margin-top: 370px;
+margin-left: 370px;
 z-index: 30;
 }
