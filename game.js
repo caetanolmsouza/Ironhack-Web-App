@@ -101,7 +101,7 @@ const bulletsIntervalId = setInterval(() => {
       return true;
     }
   });
-}, 250);
+}, 200);
 
 document.addEventListener("keydown", function (event) {
   console.log(event.key, event.keyCode, event.code);
@@ -119,7 +119,7 @@ document.addEventListener("keydown", function (event) {
       }
       player.move(+1);
       break;
-    case "ArrowUp":
+    case " ":
       if (bulletsCount > 0) {
         bulletsCount += -1;
         bulletsCounter.textContent = "bullets = " + bulletsCount;
