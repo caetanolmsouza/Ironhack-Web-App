@@ -229,7 +229,7 @@ start.addEventListener("click", () => {
   start.classList.add("isStarted");
   startDiv.classList.remove("startDiv");
   startDiv.classList.add("isStarted");
-
+  openMusic.play();
   createInterval();
 });
 
