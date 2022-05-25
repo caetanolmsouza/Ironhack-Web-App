@@ -10,6 +10,7 @@ class GamePiece {
     if (!this.isAlive) {
       return;
     }
+
     // Show the player in the currentPosition
     cells[this.position].classList.add(this.className);
   }

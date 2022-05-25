@@ -192,3 +192,35 @@ top:  200px;
 z-index: 20;
 }
 
+button {
+    position:absolute;
+    left: 610px;
+    top: 400px;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    background-color:darkolivegreen;
+    font-weight: bold;
+    font-family: monospace;
+    color:aliceblue;
+}
+
+
+.isStarted {
+    position: absolute;
+    left: -1000px;
+}
+
+body {
+    background-image: url("./images/background2.jpg");
+    background-size:cover;
+}
+
+.background2 {
+        background-image: url("./images/background3.jpg");
+        background-size:cover;
+    }
+
+    .background3 {
+        background-image: url("./images/background4.jpg");
+        background-size:cover;
+    }

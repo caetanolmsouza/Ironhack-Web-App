@@ -11,6 +11,12 @@ const winDisplay = document.querySelector(".nothingWin");
 const winDance = document.querySelector(".noClass");
 const winMacron = document.querySelector(".noClass2");
 const bulletsCounter = document.querySelector(".bulletsCount");
+const start = document.querySelector("button");
+const body = document.querySelector("body");
+
+let isEnded = false;
+
+let isStarted = false;
 
 let score = 0;
 const gridWidth = 15;
@@ -104,6 +110,9 @@ const bulletsIntervalId = setInterval(() => {
 }, 200);
 
 document.addEventListener("keydown", function (event) {
+  if (!isStarted) {
+    return;
+  }
   console.log(event.key, event.keyCode, event.code);
 
   switch (event.key) {
@@ -122,7 +131,7 @@ document.addEventListener("keydown", function (event) {
     case " ":
       if (bulletsCount > 0) {
         bulletsCount += -1;
-        bulletsCounter.textContent = "bullets = " + bulletsCount;
+        bulletsCounter.textContent = "coronas = " + bulletsCount;
 
         createBullet();
       }
@@ -141,6 +150,9 @@ function updateScore() {
 }
 
 let intervalId = setInterval(() => {
+  if (!isStarted) {
+    return;
+  }
   // move all bullets
   const aliveEnemies = getAliveEnemies();
   console.log(aliveEnemies);
@@ -155,6 +167,10 @@ let intervalId = setInterval(() => {
       gameOverUnDisplay.classList.add("gameOver");
       winMacron.classList.remove("noClass2");
       winMacron.classList.add("winMacron");
+      isStarted = false;
+      body.classList.add("background2");
+
+      //start.classList.remove("isStarted");
 
       clearInterval(intervalId);
 
@@ -162,12 +178,17 @@ let intervalId = setInterval(() => {
     }
   });
   // check collisions
-  //testing
+
   if (getAliveEnemies().length === 0) {
     player.remove();
 
     winDisplay.classList.add("win");
     winDance.classList.add("winDance");
+    isStarted = false;
+    body.classList.add("background3");
+
+    //start.classList.remove("isStarted");
+
     clearInterval(intervalId);
 
     console.log("YOU WIN!");
@@ -177,3 +198,11 @@ let intervalId = setInterval(() => {
 }, 500);
 
 //kim.move(0);
+
+start.addEventListener("click", () => {
+  if (isStarted) {
+    return;
+  }
+  isStarted = true;
+  start.classList.add("isStarted");
+});
