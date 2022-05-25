@@ -195,13 +195,14 @@ z-index: 20;
 .start {
     position:absolute;
     left: 610px;
-    top: 400px;
+    top: 250px;
     padding: 10px 20px;
     font-size: 1.5rem;
     background-color:darkolivegreen;
     font-weight: bold;
     font-family: monospace;
     color:aliceblue;
+    z-index: 35;
 }
 
 
@@ -243,4 +244,29 @@ body {
         width: 100px;
         top: 10px;
         left: 870px;
+    }
+
+    .startDiv {
+        position:absolute;
+        width: 500px;
+        height: 570px;
+background-image: url("./images/blueDegrade2.jpg");        top: 200px;
+        left: 410px;
+        background-size: cover;
+    }
+
+    .startCrown {
+        width: 170px;
+        position: relative;
+        left: 170px;
+        top: -290px;
+    }
+
+    .startTitle {
+        font-family:fantasy;
+        font-size: 4rem;
+        text-align: center;
+        top: 200px;
+        position: relative;
+color:rgb(200, 123, 155);
     }

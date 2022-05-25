@@ -13,6 +13,8 @@ const body = document.querySelector("body");
 const resetButton = document.querySelector("button");
 const openMusic = document.querySelector(".openMusic");
 const crown = document.querySelector(".crown");
+const startTitle = document.querySelector(".startTitle");
+const startDiv = document.querySelector(".startDiv");
 
 let isEnded = false;
 
@@ -225,7 +227,8 @@ start.addEventListener("click", () => {
   }
   isStarted = true;
   start.classList.add("isStarted");
-  openMusic.play();
+  startDiv.classList.remove("startDiv");
+  startDiv.classList.add("isStarted");
 
   createInterval();
 });
