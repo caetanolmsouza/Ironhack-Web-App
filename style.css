@@ -192,7 +192,7 @@ top:  200px;
 z-index: 20;
 }
 
-button {
+.start {
     position:absolute;
     left: 610px;
     top: 400px;
@@ -223,4 +223,17 @@ body {
     .background3 {
         background-image: url("./images/background4.jpg");
         background-size:cover;
+    }
+
+    .reset {
+        position:absolute;
+        left: 610px;
+        top: 700px;
+        padding: 10px 20px;
+        font-size: 1.5rem;
+        background-color:darkolivegreen;
+        font-weight: bold;
+        font-family: monospace;
+        color:aliceblue;
+        z-index: 35;
     }

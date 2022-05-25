@@ -1,9 +1,19 @@
 class GamePiece {
   constructor(position, className) {
     this.position = position;
+    this.initialPosition = position;
     this.newPosition = null;
     this.className = className;
     this.isAlive = true;
+  }
+
+  reset() {
+    // hide them from previous position
+    this.remove();
+    // make alive again
+    this.isAlive = true;
+    this.position = this.initialPosition;
+    this.show();
   }
 
   show() {
@@ -64,18 +74,7 @@ class Target extends GamePiece {
   }
 }
 
-class Player extends GamePiece {
-  /*nextMove() {
-    if (this.position === 209) {
-      this.move(-1);
-    }
-    if (this.position < 195) {
-      this.move(1);
-    }
-    this.move(1);
-  }
-}*/
-}
+class Player extends GamePiece {}
 
 class Bullet extends GamePiece {
   nextStep() {

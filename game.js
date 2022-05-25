@@ -11,12 +11,17 @@ const winDisplay = document.querySelector(".nothingWin");
 const winDance = document.querySelector(".noClass");
 const winMacron = document.querySelector(".noClass2");
 const bulletsCounter = document.querySelector(".bulletsCount");
-const start = document.querySelector("button");
+const start = document.querySelector(".start");
 const body = document.querySelector("body");
+const resetButton = document.querySelector("button");
 
 let isEnded = false;
 
 let isStarted = false;
+
+let resetOn = false;
+
+let intervalId = null;
 
 let score = 0;
 const gridWidth = 15;
@@ -25,31 +30,31 @@ const cells = [];
 
 let bulletsCount = 40;
 
-const initialPosition = 202;
+let initialPosition = 202;
 
-const xi = new Target(34, "xi-Jinping");
+let xi = new Target(34, "xi-Jinping");
 
-const trump = new Target(36, "trump");
+let trump = new Target(36, "trump");
 
-const merkel = new Target(32, "merkel");
+let merkel = new Target(32, "merkel");
 
-const harry = new Target(20, "harry");
+let harry = new Target(20, "harry");
 
-const pope = new Target(18, "pope");
+let pope = new Target(18, "pope");
 
-const musk = new Target(22, "musk");
+let musk = new Target(22, "musk");
 
-const macron = new Target(38, "macron");
+let macron = new Target(38, "macron");
 
-const boris = new Target(24, "boris");
+let boris = new Target(24, "boris");
 
-const erdogan = new Target(40, "erdogan");
+let erdogan = new Target(40, "erdogan");
 
-const kim = new Target(26, "kim");
+let kim = new Target(26, "kim");
 
-const player = new Player(202, "putin");
+let player = new Player(202, "putin");
 
-const allEnemies = [
+let allEnemies = [
   trump,
   xi,
   merkel,
@@ -144,59 +149,75 @@ player.move(0);
 function getAliveEnemies() {
   return allEnemies.filter((x) => x.isAlive);
 }
+
 function updateScore() {
   score += 12;
   scoreElement.textContent = "score = " + score;
 }
-
-let intervalId = setInterval(() => {
-  if (!isStarted) {
-    return;
-  }
-  // move all bullets
-  const aliveEnemies = getAliveEnemies();
-  console.log(aliveEnemies);
-  // move all players
-  aliveEnemies.forEach((x) => {
-    if (x.isCollidingWithAny(allBullets)) {
-      updateScore();
+function createInterval() {
+  console.log("im being called");
+  intervalId = setInterval(() => {
+    if (!isStarted && resetOn) {
+      return;
     }
-    x.move(1);
-    if (player.position === x.position) {
-      player.remove();
-      gameOverUnDisplay.classList.add("gameOver");
-      winMacron.classList.remove("noClass2");
-      winMacron.classList.add("winMacron");
-      isStarted = false;
-      body.classList.add("background2");
+    // move all bullets
+    const aliveEnemies = getAliveEnemies();
+    console.log(aliveEnemies);
+    // move all players
+    aliveEnemies.forEach((x) => {
+      if (x.isCollidingWithAny(allBullets)) {
+        updateScore();
+      }
+      x.move(1);
+      if (player.position === x.position) {
+        player.remove();
+        gameOverUnDisplay.classList.add("gameOver");
+        winMacron.classList.remove("noClass2");
+        winMacron.classList.add("winMacron");
+        isStarted = false;
+        isEnded = true;
+        body.classList.add("background2");
+        if (isStarted) {
+          resetButton.classList.add("isStarted");
+          resetButton.classList.remove("reset");
+        }
+        if (isEnded) {
+          resetButton.classList.add("reset");
+          resetButton.classList.remove("isStarted");
+        }
 
-      //start.classList.remove("isStarted");
+        clearInterval(intervalId);
+
+        console.log("GAME OVER!");
+      }
+    });
+    // check collisions
+
+    if (getAliveEnemies().length === 0) {
+      player.remove();
+
+      winDisplay.classList.add("win");
+      winDance.classList.add("winDance");
+      isStarted = false;
+      isEnded = true;
+      body.classList.add("background3");
+      if (isStarted) {
+        resetButton.classList.add("isStarted");
+        resetButton.classList.remove("reset");
+      }
+      if (isEnded) {
+        resetButton.classList.add("reset");
+        resetButton.classList.remove("isStarted");
+      }
 
       clearInterval(intervalId);
 
-      console.log("GAME OVER!");
+      console.log("YOU WIN!");
     }
-  });
-  // check collisions
 
-  if (getAliveEnemies().length === 0) {
-    player.remove();
-
-    winDisplay.classList.add("win");
-    winDance.classList.add("winDance");
-    isStarted = false;
-    body.classList.add("background3");
-
-    //start.classList.remove("isStarted");
-
-    clearInterval(intervalId);
-
-    console.log("YOU WIN!");
-  }
-
-  // remove colliding enemy/bullet pairs
-}, 500);
-
+    // remove colliding enemy/bullet pairs
+  }, 500);
+}
 //kim.move(0);
 
 start.addEventListener("click", () => {
@@ -205,4 +226,36 @@ start.addEventListener("click", () => {
   }
   isStarted = true;
   start.classList.add("isStarted");
+  createInterval();
+});
+
+resetButton.addEventListener("click", () => {
+  score = 0;
+  bulletsCount = 40;
+  isEnded = false;
+
+  isStarted = true;
+
+  resetOn = false;
+  initialPosition = 202;
+
+  player.reset();
+  allEnemies.forEach((enemy) => {
+    enemy.reset();
+  });
+  scoreElement.textContent = "score = " + score;
+  bulletsCounter.textContent = "coronas = " + bulletsCount;
+
+  createInterval();
+  winDisplay.classList.remove("win");
+  winDance.classList.remove("winDance");
+  resetButton.classList.add("isStarted");
+  resetButton.classList.remove("reset");
+  body.classList.remove("background3");
+
+  gameOverUnDisplay.classList.remove("gameOver");
+  winMacron.classList.add("noClass2");
+  winMacron.classList.remove("winMacron");
+
+  body.classList.remove("background2");
 });
