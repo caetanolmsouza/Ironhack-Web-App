@@ -2,10 +2,10 @@
     box-sizing: border-box;
 }
 h1 {
-    margin-left: 420px;
+    margin-left: 350px;
     font-family: monospace;
     font-size: 2rem;;
-    color:darkblue;
+    color:rgb(255, 255, 255);
 }
 
 
@@ -231,9 +231,16 @@ body {
         top: 700px;
         padding: 10px 20px;
         font-size: 1.5rem;
-        background-color:darkolivegreen;
+        background-color:cadetblue;
         font-weight: bold;
         font-family: monospace;
-        color:aliceblue;
+        color:darkorchid;
         z-index: 35;
+    }
+
+    .crown {
+        position: absolute;
+        width: 100px;
+        top: 10px;
+        left: 870px;
     }

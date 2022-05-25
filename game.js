@@ -1,6 +1,3 @@
-//const canvas = document.querySelector('canvas')
-//const context = canvas.getContext('2d')
-//let corVirus = document.querySelector('.corVirus')
 const gridElement = document.querySelector(".grid");
 const putin = document.querySelector(".putin");
 const coronas = document.querySelector(".coronas");
@@ -14,6 +11,8 @@ const bulletsCounter = document.querySelector(".bulletsCount");
 const start = document.querySelector(".start");
 const body = document.querySelector("body");
 const resetButton = document.querySelector("button");
+const openMusic = document.querySelector(".openMusic");
+const crown = document.querySelector(".crown");
 
 let isEnded = false;
 
@@ -133,7 +132,7 @@ document.addEventListener("keydown", function (event) {
       }
       player.move(+1);
       break;
-    case " ":
+    case "ArrowUp":
       if (bulletsCount > 0) {
         bulletsCount += -1;
         bulletsCounter.textContent = "coronas = " + bulletsCount;
@@ -226,6 +225,8 @@ start.addEventListener("click", () => {
   }
   isStarted = true;
   start.classList.add("isStarted");
+  openMusic.play();
+
   createInterval();
 });
 
