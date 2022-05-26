@@ -9,22 +9,39 @@
 </head>
 <body>
     <audio class="openMusic" src="./images/Let It Die always see you there.mp3"></audio>
-    <h2 class="score">score = 0</h2>
-    <h1>The new Czar of the world</h1>
-    <button class="isStarted">Reset</button>
+   
+    <h1>The new Czar of the world
 
-    <button class="start" >Start</button>
-   <p class="nothing"><b>GAME OVER!</b></p>
-   <p class="nothingWin"><b>YOU WIN!</b></p>
+        <img class="crown" src="./images/crown.png" alt="">
+    </h1>
+    <section>
+
+    <h2 class="score">score = 0</h2>
+
+
     <div class="grid"></div>
     <div class="bulletsCount"><b>coronas = 40</b></div>
-    <img class="noClass" src="./images/putinDance.gif" alt="PutinDance">
-    <img class="noClass2" src="./images/macronLaugh.png" alt="">
-    <img class="crown" src="./images/crown.png" alt="">
-    <div class="startDiv">
+    
+    <div class="popup hidden">
+        <img class="winMacron" src="./images/macronLaugh.png" alt="">
+        <p class="gameOver"><b>GAME OVER!</b></p>
+        <button class="reset">Reset</button>
+
+
+    </div>
+    
+    <div class="popup hidden">
+        <img class="putinDance" src="./images/putinDance.gif" alt="PutinDance">
+        <p class="youWin">YOU WIN!</p>
+        <button class="reset">Reset</button>
+    </div>
+
+    <div class="popup start-popup">
+        <button class="start" >Start</button>
         <p class="startTitle">The new <br> Czar of the<br> World</p>
         <img class="startCrown" src="./images/crown.png" alt="">
     </div>
+</section>
     <script src="./gamePiece.js"></script>
     <script src="./game.js"></script>
 </body>

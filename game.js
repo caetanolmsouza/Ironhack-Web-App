@@ -1,20 +1,19 @@
 const gridElement = document.querySelector(".grid");
 const putin = document.querySelector(".putin");
 const coronas = document.querySelector(".coronas");
-const xiJinping = document.querySelector(".xi-Jinping");
 const scoreElement = document.querySelector(".score");
-const gameOverUnDisplay = document.querySelector(".nothing");
-const winDisplay = document.querySelector(".nothingWin");
-const winDance = document.querySelector(".noClass");
-const winMacron = document.querySelector(".noClass2");
+const hidden = document.querySelector(".hidden");
 const bulletsCounter = document.querySelector(".bulletsCount");
 const start = document.querySelector(".start");
 const body = document.querySelector("body");
-const resetButton = document.querySelector("button");
+const resetButtons = document.querySelectorAll(".reset");
 const openMusic = document.querySelector(".openMusic");
 const crown = document.querySelector(".crown");
 const startTitle = document.querySelector(".startTitle");
-const startDiv = document.querySelector(".startDiv");
+const popups = document.querySelectorAll(".popup");
+const losePopup = popups[0];
+const winPopup = popups[1];
+const startPopup = popups[2];
 
 let isEnded = false;
 
@@ -156,7 +155,6 @@ function updateScore() {
   scoreElement.textContent = "score = " + score;
 }
 function createInterval() {
-  console.log("im being called");
   intervalId = setInterval(() => {
     if (!isStarted && resetOn) {
       return;
@@ -172,20 +170,10 @@ function createInterval() {
       x.move(1);
       if (player.position === x.position) {
         player.remove();
-        gameOverUnDisplay.classList.add("gameOver");
-        winMacron.classList.remove("noClass2");
-        winMacron.classList.add("winMacron");
+        losePopup.classList.remove("hidden");
         isStarted = false;
         isEnded = true;
         body.classList.add("background2");
-        if (isStarted) {
-          resetButton.classList.add("isStarted");
-          resetButton.classList.remove("reset");
-        }
-        if (isEnded) {
-          resetButton.classList.add("reset");
-          resetButton.classList.remove("isStarted");
-        }
 
         clearInterval(intervalId);
 
@@ -196,20 +184,10 @@ function createInterval() {
 
     if (getAliveEnemies().length === 0) {
       player.remove();
-
-      winDisplay.classList.add("win");
-      winDance.classList.add("winDance");
+      winPopup.classList.remove("hidden");
       isStarted = false;
       isEnded = true;
       body.classList.add("background3");
-      if (isStarted) {
-        resetButton.classList.add("isStarted");
-        resetButton.classList.remove("reset");
-      }
-      if (isEnded) {
-        resetButton.classList.add("reset");
-        resetButton.classList.remove("isStarted");
-      }
 
       clearInterval(intervalId);
 
@@ -226,20 +204,16 @@ start.addEventListener("click", () => {
     return;
   }
   isStarted = true;
-  start.classList.add("isStarted");
-  startDiv.classList.remove("startDiv");
-  startDiv.classList.add("isStarted");
-  openMusic.play();
+  startPopup.classList.add("hidden");
+
   createInterval();
 });
 
-resetButton.addEventListener("click", () => {
+const reset = () => {
   score = 0;
   bulletsCount = 40;
   isEnded = false;
-
   isStarted = true;
-
   resetOn = false;
   initialPosition = 202;
 
@@ -251,15 +225,13 @@ resetButton.addEventListener("click", () => {
   bulletsCounter.textContent = "coronas = " + bulletsCount;
 
   createInterval();
-  winDisplay.classList.remove("win");
-  winDance.classList.remove("winDance");
-  resetButton.classList.add("isStarted");
-  resetButton.classList.remove("reset");
+  winPopup.classList.add("hidden");
+  losePopup.classList.add("hidden");
+
   body.classList.remove("background3");
-
-  gameOverUnDisplay.classList.remove("gameOver");
-  winMacron.classList.add("noClass2");
-  winMacron.classList.remove("winMacron");
-
   body.classList.remove("background2");
-});
+};
+
+resetButtons.forEach((resetButton) =>
+  resetButton.addEventListener("click", reset)
+);
